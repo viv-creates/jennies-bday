@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Jennie's 3rd Birthday Party!</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600;800&family=Nunito:wght@400;600;700&display=swap');
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --peach: #f5c9a8;
+      --peach-light: #fde8d8;
+      --warm-brown: #c4895a;
+      --soft-pink: #f5b8c8;
+      --sky-blue: #a8d8ea;
+      --cream: #fef6ef;
+      --sand: #e8d5b7;
+      --green: #a8c8a0;
+      --dark-brown: #6b4226;
+    }
+
+    body {
+      font-family: 'Nunito', sans-serif;
+      background: var(--cream);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    .balloons-bg {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .balloon {
+      position: absolute;
+      border-radius: 50%;
+      opacity: 0.18;
+      animation: floatBalloon linear infinite;
+    }
+
+    @keyframes floatBalloon {
+      0%   { transform: translateY(110vh) rotate(0deg); opacity: 0; }
+      10%  { opacity: 0.18; }
+      90%  { opacity: 0.18; }
+      100% { transform: translateY(-20vh) rotate(20deg); opacity: 0; }
+    }
+
+    .wrapper {
+      position: relative;
+      z-index: 1;
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 20px 16px 60px;
+    }
+
+    .hero {
+      background: linear-gradient(160deg, #fde8d8 0%, #fce4f0 50%, #d4ecf7 100%);
+      border-radius: 32px;
+      padding: 40px 32px 32px;
+      text-align: center;
+      box-shadow: 0 8px 40px rgba(180,120,80,0.13);
+      position: relative;
+      overflow: hidden;
+      margin-bottom: 24px;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -40px; right: -40px;
+      width: 180px; height: 180px;
+      background: radial-gradient(circle, rgba(245,184,200,0.4) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: -30px; left: -30px;
+      width: 140px; height: 140px;
+      background: radial-gradient(circle, rgba(168,216,234,0.4) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+
+    .animal-row {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+    }
+
+    .animal {
+      font-size: 2.8rem;
+      filter: drop-shadow(0 3px 6px rgba(0,0,0,0.12));
+      animation: bobble 3s ease-in-out infinite;
+    }
+    .animal:nth-child(2) { animation-delay: 0.5s; }
+    .animal:nth-child(3) { animation-delay: 1s; }
+    .animal:nth-child(4) { animation-delay: 1.5s; }
+    .animal:nth-child(5) { animation-delay: 2s; }
+
+    @keyframes bobble {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+
+    .welcome-tag {
+      display: inline-block;
+      background: var(--warm-brown);
+      color: #fff;
+      font-family: 'Baloo 2', cursive;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 4px 16px;
+      border-radius: 20px;
+      margin-bottom: 12px;
+    }
+
+    .hero h1 {
+      font-family: 'Baloo 2', cursive;
+      font-size: clamp(2.4rem, 8vw, 3.6rem);
+      font-weight: 800;
+      color: var(--dark-brown);
+      line-height: 1.1;
+      margin-bottom: 4px;
+    }
+
+    .hero h1 span { color: var(--warm-brown); }
+
+    .hero .turning {
+      font-family: 'Baloo 2', cursive;
+      font-size: clamp(1.1rem, 4vw, 1.4rem);
+      color: #b07850;
+      margin-bottom: 20px;
+    }
+
+    .big-3 {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 72px; height: 72px;
+      background: linear-gradient(135deg, var(--soft-pink), var(--sky-blue));
+      border-radius: 50%;
+      font-family: 'Baloo 2', cursive;
+      font-size: 2.8rem;
+      font-weight: 800;
+      color: #fff;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+      margin: 0 8px;
+      animation: spin3 4s ease-in-out infinite;
+    }
+
+    @keyframes spin3 {
+      0%, 100% { transform: rotate(-5deg) scale(1); }
+      50% { transform: rotate(5deg) scale(1.05); }
+    }
+
+    .details-card {
+      background: #fff;
+      border-radius: 24px;
+      padding: 28px;
+      box-shadow: 0 4px 24px rgba(180,120,80,0.09);
+      margin-bottom: 24px;
+    }
+
+    .details-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    @media (max-width: 480px) {
+      .details-grid { grid-template-columns: 1fr; }
+    }
+
+    .detail-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 16px;
+      background: var(--cream);
+      border-radius: 16px;
+      border: 1.5px solid var(--sand);
+    }
+
+    .detail-icon { font-size: 1.8rem; flex-shrink: 0; }
+
+    .detail-label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--warm-brown);
+      margin-bottom: 2px;
+    }
+
+    .detail-value {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--dark-brown);
+      line-height: 1.3;
+    }
+
+    .detail-sub {
+      font-size: 0.8rem;
+      color: #9a7a5a;
+      margin-top: 2px;
+    }
+
+    .about-card {
+      background: linear-gradient(135deg, #fce4f0, #d4ecf7);
+      border-radius: 24px;
+      padding: 28px;
+      margin-bottom: 24px;
+      text-align: center;
+    }
+
+    .about-card h2 {
+      font-family: 'Baloo 2', cursive;
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: var(--dark-brown);
+      margin-bottom: 16px;
+    }
+
+    .hobbies {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+    }
+
+    .hobby-chip {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 0.88rem;
+      font-weight: 700;
+      background: #fff;
+      color: var(--dark-brown);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+
+    .pool-strip {
+      background: linear-gradient(135deg, #7ec8e3, #a8d8ea, #c8eaf5);
+      border-radius: 24px;
+      padding: 24px 28px;
+      margin-bottom: 24px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .pool-strip::before {
+      content: '🌊🌊🌊🌊🌊🌊🌊🌊🌊🌊';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      font-size: 1.4rem;
+      opacity: 0.3;
+      letter-spacing: -4px;
+    }
+
+    .pool-strip h2 {
+      font-family: 'Baloo 2', cursive;
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: #1a6080;
+      margin-bottom: 8px;
+    }
+
+    .pool-strip p { font-size: 0.9rem; color: #2a7a9a; font-weight: 600; }
+
+    .pool-icons {
+      font-size: 2rem;
+      margin-bottom: 8px;
+      display: flex;
+      gap: 8px;
+      justify-content: center;
+    }
+
+    .game-card {
+      background: linear-gradient(160deg, #fff8e8, #fef0f8);
+      border-radius: 24px;
+      padding: 32px 28px;
+      margin-bottom: 24px;
+      text-align: center;
+      box-shadow: 0 4px 24px rgba(180,120,80,0.09);
+      border: 2px dashed var(--sand);
+    }
+
+    .game-card h2 {
+      font-family: 'Baloo 2', cursive;
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--dark-brown);
+      margin-bottom: 6px;
+    }
+
+    .game-card .game-sub {
+      font-size: 0.88rem;
+      color: #9a7a5a;
+      margin-bottom: 20px;
+    }
+
+    .animal-choices {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+
+    @media (max-width: 380px) {
+      .animal-choices { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    .animal-btn {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      padding: 14px 8px;
+      border: 2.5px solid var(--sand);
+      border-radius: 18px;
+      background: #fff;
+      cursor: pointer;
+      font-family: 'Nunito', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--dark-brown);
+      transition: all 0.18s;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+
+    .animal-btn .a-emoji { font-size: 2rem; }
+
+    .animal-btn:hover {
+      border-color: var(--warm-brown);
+      transform: translateY(-3px);
+      box-shadow: 0 6px 18px rgba(196,137,90,0.2);
+    }
+
+    .animal-btn.selected {
+      border-color: var(--warm-brown);
+      background: linear-gradient(135deg, #fde8d8, #fce4f0);
+      transform: translateY(-3px);
+      box-shadow: 0 6px 18px rgba(196,137,90,0.25);
+    }
+
+    .guess-result {
+      display: none;
+      padding: 16px;
+      border-radius: 16px;
+      font-family: 'Baloo 2', cursive;
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-top: 4px;
+      background: linear-gradient(135deg, #fff8e8, #fce4f0);
+      color: var(--dark-brown);
+    }
+
+    .rsvp-card {
+      background: #fff;
+      border-radius: 24px;
+      padding: 32px 28px;
+      box-shadow: 0 4px 24px rgba(180,120,80,0.09);
+    }
+
+    .rsvp-card h2 {
+      font-family: 'Baloo 2', cursive;
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: var(--dark-brown);
+      text-align: center;
+      margin-bottom: 6px;
+    }
+
+    .rsvp-card .rsvp-sub {
+      text-align: center;
+      font-size: 0.85rem;
+      color: #9a7a5a;
+      margin-bottom: 24px;
+    }
+
+    .form-group { margin-bottom: 18px; }
+
+    label {
+      display: block;
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--warm-brown);
+      margin-bottom: 6px;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    textarea,
+    select {
+      width: 100%;
+      padding: 12px 16px;
+      border: 2px solid var(--sand);
+      border-radius: 14px;
+      font-family: 'Nunito', sans-serif;
+      font-size: 0.95rem;
+      color: var(--dark-brown);
+      background: var(--cream);
+      transition: border-color 0.2s, box-shadow 0.2s;
+      outline: none;
+    }
+
+    input:focus, textarea:focus, select:focus {
+      border-color: var(--warm-brown);
+      box-shadow: 0 0 0 3px rgba(196,137,90,0.15);
+    }
+
+    textarea { resize: vertical; min-height: 90px; }
+
+    .guests-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .guests-section {
+      overflow: hidden;
+      max-height: 0;
+      opacity: 0;
+      transition: max-height 0.4s ease, opacity 0.3s ease, margin 0.3s ease;
+      margin-bottom: 0;
+    }
+
+    .guests-section.visible {
+      max-height: 120px;
+      opacity: 1;
+      margin-bottom: 18px;
+    }
+
+    .btn-submit {
+      width: 100%;
+      padding: 16px;
+      background: linear-gradient(135deg, var(--warm-brown), #e0a070);
+      color: #fff;
+      font-family: 'Baloo 2', cursive;
+      font-size: 1.2rem;
+      font-weight: 700;
+      border: none;
+      border-radius: 16px;
+      cursor: pointer;
+      transition: transform 0.15s, box-shadow 0.15s;
+      box-shadow: 0 4px 16px rgba(196,137,90,0.35);
+      margin-top: 8px;
+    }
+
+    .btn-submit:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(196,137,90,0.4);
+    }
+
+    .btn-submit:active { transform: translateY(0); }
+
+    .success-msg {
+      display: none;
+      text-align: center;
+      padding: 32px 16px;
+    }
+
+    .success-msg .s-icon { font-size: 4rem; margin-bottom: 12px; }
+
+    .success-msg h3 {
+      font-family: 'Baloo 2', cursive;
+      font-size: 1.6rem;
+      color: var(--dark-brown);
+      margin-bottom: 8px;
+    }
+
+    .success-msg p { color: #9a7a5a; font-size: 0.95rem; }
+
+    .footer {
+      text-align: center;
+      margin-top: 32px;
+      font-size: 0.8rem;
+      color: #c4a080;
+    }
+
+    .divider {
+      text-align: center;
+      font-size: 1.4rem;
+      letter-spacing: 6px;
+      margin: 4px 0 20px;
+      opacity: 0.6;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="balloons-bg" id="balloonsBg"></div>
+
+  <div class="wrapper">
+
+    <div class="hero">
+      <div class="welcome-tag">You're Invited!</div>
+      <div class="animal-row">
+        <span class="animal">🦁</span>
+        <span class="animal">🐘</span>
+        <span class="animal">🐻</span>
+        <span class="animal">🐰</span>
+        <span class="animal">🦒</span>
+      </div>
+      <h1>Happy Birthday,<br><span>Jennie!</span></h1>
+      <p class="turning">She's turning <span class="big-3">3</span> !</p>
+      <div class="divider">🌸 🎈 🌸</div>
+      <p style="font-size:1rem; color:#9a7a5a; font-weight:600;">Come splash &amp; celebrate with us!</p>
+    </div>
+
+    <div class="details-card">
+      <div class="details-grid">
+        <div class="detail-item">
+          <span class="detail-icon">📅</span>
+          <div>
+            <div class="detail-label">Date</div>
+            <div class="detail-value">Saturday</div>
+            <div class="detail-value">July 25, 2026</div>
+          </div>
+        </div>
+        <div class="detail-item">
+          <span class="detail-icon">⏰</span>
+          <div>
+            <div class="detail-label">Time</div>
+            <div class="detail-value">3:30 PM</div>
+            <div class="detail-sub">until the sun goes down</div>
+          </div>
+        </div>
+        <div class="detail-item">
+          <span class="detail-icon">📍</span>
+          <div>
+            <div class="detail-label">Location</div>
+            <div class="detail-value">Pasadena, CA</div>
+            <div class="detail-sub">Address to follow via text</div>
+          </div>
+        </div>
+        <div class="detail-item">
+          <span class="detail-icon">👙</span>
+          <div>
+            <div class="detail-label">What to Wear</div>
+            <div class="detail-value">Summer Attire</div>
+            <div class="detail-sub">Swimsuit · towel · sunscreen · hat</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="pool-strip">
+      <div class="pool-icons">🏊‍♀️ 💦 🌈 🦆 ☀️</div>
+      <h2>It's a Pool Party!</h2>
+      <p>Floaties, splashes &amp; birthday wishes await.<br>Ready to make a splash with Jennie?</p>
+    </div>
+
+    <div class="about-card">
+      <h2>🌟 All About Jennie 🌟</h2>
+      <div class="hobbies">
+        <div class="hobby-chip">🎨 Arts &amp; Crafts</div>
+        <div class="hobby-chip">📚 Reading</div>
+        <div class="hobby-chip">🎵 Singing</div>
+        <div class="hobby-chip">🍓 Strawberries</div>
+        <div class="hobby-chip" style="background: linear-gradient(135deg, #fce4f0, #f5b8c8);">💗 Pink</div>
+        <div class="hobby-chip" style="background: linear-gradient(135deg, #d4ecf7, #a8d8ea);">💙 Blue</div>
+        <div class="hobby-chip">🦁 Animals</div>
+      </div>
+    </div>
+
+    <div class="game-card">
+      <h2>🔍 Guess Jennie's Favorite Animal!</h2>
+      <p class="game-sub">Cast your vote — Jennie will reveal the answer at the party! 🎉</p>
+      <div class="animal-choices" id="animalChoices">
+        <button class="animal-btn" onclick="castVote('Lion')" id="btn-Lion"><span class="a-emoji">🦁</span>Lion</button>
+        <button class="animal-btn" onclick="castVote('Elephant')" id="btn-Elephant"><span class="a-emoji">🐘</span>Elephant</button>
+        <button class="animal-btn" onclick="castVote('Bear')" id="btn-Bear"><span class="a-emoji">🐻</span>Bear</button>
+        <button class="animal-btn" onclick="castVote('Bunny')" id="btn-Bunny"><span class="a-emoji">🐰</span>Bunny</button>
+        <button class="animal-btn" onclick="castVote('Giraffe')" id="btn-Giraffe"><span class="a-emoji">🦒</span>Giraffe</button>
+        <button class="animal-btn" onclick="castVote('Penguin')" id="btn-Penguin"><span class="a-emoji">🐧</span>Penguin</button>
+      </div>
+      <div class="guess-result" id="guessResult"></div>
+    </div>
+
+    <div class="rsvp-card">
+      <h2>🎉 RSVP</h2>
+      <p class="rsvp-sub">Please let us know by July 10th &nbsp;💌</p>
+
+      <div id="rsvpForm">
+        <div class="form-group">
+          <label for="name">Your Name</label>
+          <input type="text" id="name" placeholder="e.g. Sarah Smith" required />
+        </div>
+
+        <div class="form-group">
+          <label for="attending">Will you be there?</label>
+          <select id="attending" onchange="toggleGuests(this.value)">
+            <option value="">— Select —</option>
+            <option value="yes">🎉 Yes, we'll be there!</option>
+            <option value="maybe">🤔 Maybe (will confirm later)</option>
+            <option value="no">😢 Sorry, can't make it</option>
+          </select>
+        </div>
+
+        <div class="guests-section" id="guestsSection">
+          <div class="guests-row">
+            <div>
+              <label for="adults">Adults</label>
+              <input type="number" id="adults" min="1" max="10" value="1" />
+            </div>
+            <div>
+              <label for="kids">Kids</label>
+              <input type="number" id="kids" min="0" max="10" value="0" />
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="note">Leave a note for Jennie <span style="text-transform:none; font-weight:400; color:#bbb;">(optional)</span></label>
+          <textarea id="note" placeholder="A birthday wish, dietary needs, questions — anything!"></textarea>
+        </div>
+
+        <button class="btn-submit" onclick="submitRSVP()">Send my RSVP 🎈</button>
+      </div>
+
+      <div class="success-msg" id="successMsg">
+        <div class="s-icon" id="successIcon">🥳</div>
+        <h3 id="successTitle"></h3>
+        <p id="successText"></p>
+      </div>
+    </div>
+
+    <div class="footer">
+      Made with 💗 for Jennie's 3rd birthday &nbsp;·&nbsp; July 25, 2026
+    </div>
+
+  </div>
+
+  <script>
+    const SHEET_URL = 'https://script.google.com/macros/s/AKfycbw4OLH7jN9b5s3FS7oYYPKzKC6quynBlpC5zFXoPifXQwMRGQdlnFy9nAGE8ctzIeDa/exec';
+
+    function postToSheet(data) {
+      return new Promise((resolve) => {
+        const img = new Image();
+        img.onload = img.onerror = resolve;
+        img.src = `${SHEET_URL}?${new URLSearchParams(data)}`;
+      });
+    }
+
+    const colors = ['#f5c9a8','#f5b8c8','#a8d8ea','#c4895a','#e8d5b7','#a8c8a0','#fde8d8'];
+    const bg = document.getElementById('balloonsBg');
+    for (let i = 0; i < 18; i++) {
+      const b = document.createElement('div');
+      b.className = 'balloon';
+      const size = 30 + Math.random() * 60;
+      b.style.cssText = `width:${size}px;height:${size}px;background:${colors[Math.floor(Math.random()*colors.length)]};left:${Math.random()*100}%;animation-duration:${10+Math.random()*18}s;animation-delay:${-Math.random()*20}s;`;
+      bg.appendChild(b);
+    }
+
+    function toggleGuests(val) {
+      document.getElementById('guestsSection').classList.toggle('visible', val === 'yes');
+    }
+
+    async function submitRSVP() {
+      const name = document.getElementById('name').value.trim();
+      const attending = document.getElementById('attending').value;
+      if (!name) {
+        const el = document.getElementById('name');
+        el.focus(); el.style.borderColor = '#e07070';
+        setTimeout(() => el.style.borderColor = '', 2000);
+        return;
+      }
+      if (!attending) {
+        const el = document.getElementById('attending');
+        el.focus(); el.style.borderColor = '#e07070';
+        setTimeout(() => el.style.borderColor = '', 2000);
+        return;
+      }
+
+      const btn = document.querySelector('.btn-submit');
+      btn.disabled = true;
+      btn.textContent = 'Sending… 🎈';
+
+      await postToSheet({
+        name,
+        attending,
+        adults: attending === 'yes' ? document.getElementById('adults').value : '',
+        kids:   attending === 'yes' ? document.getElementById('kids').value : '',
+        guess:  selectedAnimal || '',
+        note:   document.getElementById('note').value.trim()
+      });
+
+      const firstName = name.split(' ')[0];
+      if (attending === 'yes') {
+        document.getElementById('successIcon').textContent = '🥳';
+        document.getElementById('successTitle').textContent = 'Yay! We got your RSVP!';
+        document.getElementById('successText').innerHTML = `Thank you, ${firstName}! Jennie can't wait to celebrate with you.<br><br>See you at the pool! 🏊‍♀️💦`;
+        burst();
+      } else if (attending === 'maybe') {
+        document.getElementById('successIcon').textContent = '🤞';
+        document.getElementById('successTitle').textContent = 'Got it, fingers crossed!';
+        document.getElementById('successText').innerHTML = `Thanks for letting us know, ${firstName}! We hope you can make it — we'll save a spot for you! 💗`;
+      } else {
+        document.getElementById('successIcon').textContent = '💙';
+        document.getElementById('successTitle').textContent = 'Thanks for letting us know!';
+        document.getElementById('successText').innerHTML = `We'll miss you, ${firstName}! Wishing you a wonderful day — we'll celebrate with you another time! 🌸`;
+      }
+      document.getElementById('rsvpForm').style.display = 'none';
+      document.getElementById('successMsg').style.display = 'block';
+    }
+
+    const ANIMALS = ['Lion','Elephant','Bear','Bunny','Giraffe','Penguin'];
+    const EMOJIS  = {'Lion':'🦁','Elephant':'🐘','Bear':'🐻','Bunny':'🐰','Giraffe':'🦒','Penguin':'🐧'};
+    let selectedAnimal = null;
+
+    function castVote(animal) {
+      selectedAnimal = animal;
+      ANIMALS.forEach(a => document.getElementById('btn-' + a).classList.remove('selected'));
+      document.getElementById('btn-' + animal).classList.add('selected');
+      const res = document.getElementById('guessResult');
+      res.innerHTML = `You picked ${EMOJIS[animal]} <strong>${animal}</strong>!<br><span style="font-size:0.85rem; font-weight:400;">Changed your mind? Tap another animal. Jennie reveals at the party! 🎊</span>`;
+      res.style.display = 'block';
+    }
+
+    function burst() {
+      const emojis = ['🎉','🎈','🌸','⭐','💗','🦁','🐘','🐻','💦','🍓'];
+      for (let i = 0; i < 24; i++) {
+        const el = document.createElement('div');
+        el.textContent = emojis[Math.floor(Math.random()*emojis.length)];
+        const dx = (Math.random()-0.5)*300, dy = (Math.random()-0.5)*300;
+        const rot = Math.random()*360;
+        el.style.cssText = `position:fixed;left:${20+Math.random()*60}%;top:${20+Math.random()*60}%;font-size:${1.2+Math.random()*1.4}rem;pointer-events:none;z-index:999;animation:fly${i} ${1.2+Math.random()*1.2}s ease-out forwards;animation-delay:${Math.random()*0.4}s;`;
+        const s = document.createElement('style');
+        s.textContent = `@keyframes fly${i}{0%{opacity:1;transform:translate(0,0) scale(1) rotate(0deg);}100%{opacity:0;transform:translate(${dx}px,${dy}px) scale(0.3) rotate(${rot}deg);}}`;
+        document.head.appendChild(s);
+        document.body.appendChild(el);
+        setTimeout(() => { el.remove(); s.remove(); }, 3000);
+      }
+    }
+  </script>
+</body>
+</html>
